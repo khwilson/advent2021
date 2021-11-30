@@ -1,0 +1,30 @@
+from __future__ import annotations
+
+
+class Coord:
+    """
+    Represent an x/y coordiate as a pair of ints. Also allow for
+    adding and multiplying them pointwise.
+    """
+
+    def __init__(self, x: int, y: int):
+        self.x = x
+        self.y = y
+
+    def __mul__(self, other: int) -> Coord:
+        return Coord(self.x * other, self.y * other)
+
+    def __add__(self, other: Coord) -> Coord:
+        return Coord(self.x + other.x, self.y + other.y)
+
+    def rotate_cw(self) -> Coord:
+        return Coord(-self.y, self.x)
+
+    def rotate_ccw(self) -> Coord:
+        return Coord(self.y, -self.x)
+
+
+NORTH = Coord(0, 1)
+SOUTH = Coord(0, -1)
+EAST = Coord(1, 0)
+WEST = Coord(-1, 0)
