@@ -32,4 +32,4 @@ def run_solution(day: int, input_file: Optional[str]):
 
 
 if __name__ == "__main__":
-    run_solution()
+    run_solution()  # pylint: disable=no-value-for-parameter

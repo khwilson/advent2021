@@ -1,2 +1,2 @@
 """ Automating some import """
-from .solutions import *
+from advent.solutions import *
