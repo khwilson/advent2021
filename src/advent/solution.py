@@ -28,7 +28,7 @@ class Solution:
     @property
     def data(self):
         """Parsed data for the problem"""
-        if not self._data:
+        if self._data is None:
             self._data = self.parse()
         return self._data
 
