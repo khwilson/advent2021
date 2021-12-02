@@ -9,6 +9,7 @@ from advent.types import FilenameType
 
 
 class Solution:
+    """Class for coding up a solution"""
 
     _day_to_class = {}
 
@@ -23,6 +24,7 @@ class Solution:
 
     @staticmethod
     def for_day(day: int) -> Solution:
+        """Get the Solution class for the passed `day`"""
         return Solution._day_to_class[day]
 
     @property
