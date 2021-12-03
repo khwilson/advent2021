@@ -1,7 +1,4 @@
-from collections import Counter, defaultdict
-
 import numpy as np
-import pandas as pd
 
 from ..solution import Solution
 
@@ -9,7 +6,9 @@ from ..solution import Solution
 class Day03(Solution, day=3):
     def parse(self):
         with open(self.input_file, "rt") as infile:
-            return np.array([[int(x) for x in line.strip()] for line in infile if line.strip()])
+            return np.array(
+                [[int(x) for x in line.strip()] for line in infile if line.strip()]
+            )
 
     def part1(self):
         totals = self.data.sum(axis=0)
@@ -18,7 +17,6 @@ class Day03(Solution, day=3):
         γ = int("".join(map(str, γ.astype(int))), 2)
         ε = int("".join(map(str, ε.astype(int))), 2)
         return γ * ε
-
 
     def part2(self):
         data = self.data.copy()

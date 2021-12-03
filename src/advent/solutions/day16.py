@@ -6,7 +6,7 @@ import pandas as pd
 from ..solution import Solution
 
 
-class Day01(Solution, day=1):
+class Day16(Solution, day=16):
     def parse(self):
         with open(self.input_file, "rt") as infile:
             pass
