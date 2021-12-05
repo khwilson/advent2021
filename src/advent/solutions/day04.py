@@ -7,6 +7,12 @@ from ..solution import Solution
 
 
 class Day04(Solution, day=4):
+    """
+    An alternative solution would be to read each board one at a time, determine the
+    number that would cause it to win, and store the first winning board and the
+    last winning board. This would yield only on pass of the data.
+    """
+
     def parse(self):
         with open(self.input_file, "rt") as infile:
             called_values = [int(x) for x in next(infile).strip().split(",")]
