@@ -7,7 +7,7 @@ class Day06(Solution, day=6):
     def parse(self):
         data = [0] * 9
         with open(self.input_file, "rt") as infile:
-            for fish in infile.read().split(','):
+            for fish in infile.read().split(","):
                 data[int(fish)] += 1
         return data
 
