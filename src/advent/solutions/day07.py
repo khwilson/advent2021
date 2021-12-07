@@ -121,7 +121,7 @@ class Day07(Solution, day=7):
         cumsum = np.cumsum(counts[::-1])[::-1]
         count_gt_value = np.hstack([cumsum[1:], [0]])
 
-        extra_term = 2 * values - np.sum(data)
+        extra_term = 2 * (values - np.sum(data))
 
         # The case when the RHS of (2) is not 0:
         subgradient_has_zero = np.where(
