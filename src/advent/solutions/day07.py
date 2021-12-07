@@ -129,7 +129,8 @@ class Day07(Solution, day=7):
         )[0]
         if len(subgradient_has_zero) != 0:
             argmin = values[subgradient_has_zero[0]]
-            return np.sum(np.abs(values - argmin) * counts) / 2
+            tmp = np.abs(values - argmin)
+            return np.sum(tmp * (tmp + 1) * counts) / 2
 
         # The case when the RHS of (2) is 0. Here we're considering the values to be the
         # indexed by the a of (a, b) above. So we need to add back in (counts) to the
