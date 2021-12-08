@@ -65,6 +65,14 @@ class Day07(Solution, day=7):
         """
         data = np.array(self.data)  # Assume this is nonempty
         values, counts = np.unique(data, return_counts=True)
+
+        # At this point the short version of this code is just the following:
+        #
+        # potential_argmins = np.arange(values.min(), values.max() + 1, dtype=int)
+        # vals = np.sum(np.abs(potential_argmins[:, np.newaxis] - values[np.newaxis, :]) * counts[np.newaxis, :], axis=1)
+        # return vals.min()
+
+        # But it's more fun with math!
         cumsum = np.cumsum(counts)
         count_lt_value = np.hstack([[0], cumsum[:-1]])
 
@@ -115,6 +123,16 @@ class Day07(Solution, day=7):
         """
         data = np.array(self.data)  # Assume this is nonempty
         values, counts = np.unique(data, return_counts=True)
+
+        # At this point the short version of this code is just the following:
+        #
+        # potential_argmins = np.arange(values.min(), values.max() + 1, dtype=int)
+        # tmp = np.abs(potential_argmins[:, np.newaxis] - values[np.newaxis, :])
+        # tmp *= (tmp + 1) * counts[np.newaxis, :]
+        # vals = np.sum(tmp, axis=1) / 2
+        # return vals.min()
+
+        # But it's more fun with math!
         cumsum = np.cumsum(counts)
         count_lt_value = np.hstack([[0], cumsum[:-1]])
 
