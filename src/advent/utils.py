@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Tuple
+
 
 class Coord:
     """
@@ -28,3 +30,16 @@ NORTH = Coord(0, 1)
 SOUTH = Coord(0, -1)
 EAST = Coord(1, 0)
 WEST = Coord(-1, 0)
+
+
+def around(x: int, y: int, shape: Tuple[int, int]):
+    if x + 1 < shape[0]:
+        yield x + 1, y
+    if x - 1 >= 0:
+        yield x - 1, y
+
+    if y + 1 < shape[1]:
+        yield x, y + 1
+
+    if y - 1 >= 0:
+        yield x, y - 1

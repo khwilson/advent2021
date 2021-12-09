@@ -7,7 +7,7 @@ class Day08(Solution, day=8):
         outputs = []
         with open(self.input_file, "rt") as infile:
             for line in infile:
-                the_in, the_out = line.strip().split('|')
+                the_in, the_out = line.strip().split("|")
                 inputs.append(the_in.strip().split())
                 outputs.append(the_out.strip().split())
 
@@ -17,7 +17,12 @@ class Day08(Solution, day=8):
         }
 
     def part1(self):
-        return sum(1 for output in self.data["outputs"] for out in output if len(out) in [2, 3, 4, 7])
+        return sum(
+            1
+            for output in self.data["outputs"]
+            for out in output
+            if len(out) in [2, 3, 4, 7]
+        )
 
     def part2(self):
         # 2, 3, and 5 use five lines
@@ -43,7 +48,11 @@ class Day08(Solution, day=8):
 
             patterns[6] = frozenset(patterns[5] | (patterns[8] - patterns[7]))
             patterns[9] = frozenset(patterns[3] | patterns[4])
-            patterns[0] = [frozenset(x) for x in the_in if len(x) == 6 and set(x) not in [patterns[6], patterns[9]]][0]
+            patterns[0] = [
+                frozenset(x)
+                for x in the_in
+                if len(x) == 6 and set(x) not in [patterns[6], patterns[9]]
+            ][0]
 
             mapper = {val: key for key, val in patterns.items()}
 
