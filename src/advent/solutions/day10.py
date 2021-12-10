@@ -1,8 +1,4 @@
-from collections import Counter, defaultdict
-from typing import Optional
-
-import numpy as np
-import pandas as pd
+from typing import List, Optional, Tuple
 
 from ..solution import Solution
 
@@ -31,7 +27,13 @@ OPOINTS = {
 }
 
 
-def find_illegal_char(line: str) -> Optional[str]:
+def find_illegal_char(line: str) -> Tuple[Optional[str], Optional[List[str]]]:
+    """
+    First argument is not None when there's an illegal character.
+
+    Second argument is not None when there's an incomplete line. It's the characters
+    which need to be closed.
+    """
     chars = []
     for char in line:
         match char:
@@ -44,6 +46,8 @@ def find_illegal_char(line: str) -> Optional[str]:
                     chars.pop()
                 else:
                     return char, None
+            case _:
+                ValueError("Can't happen")
     return None, chars
 
 
