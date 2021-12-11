@@ -43,3 +43,16 @@ def around(x: int, y: int, shape: Tuple[int, int]):
 
     if y - 1 >= 0:
         yield x, y - 1
+
+
+def saround(x: int, y: int, shape: Tuple[int, int]):
+    yield from around(x, y, shape)
+
+    if x + 1 < shape[0] and y + 1 < shape[1]:
+        yield x + 1, y + 1
+    if x + 1 < shape[0] and y - 1 >= 0:
+        yield x + 1, y - 1
+    if x - 1 >= 0 and y + 1 < shape[1]:
+        yield x - 1, y + 1
+    if x - 1 >= 0 and y - 1 >= 0:
+        yield x - 1, y - 1
