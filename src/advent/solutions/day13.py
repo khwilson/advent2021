@@ -1,10 +1,37 @@
 import copy
-from collections import Counter, defaultdict
+from typing import Set, Tuple
 
 import numpy as np
-import pandas as pd
 
 from ..solution import Solution
+
+
+def fold(grid: Set[Tuple[str, int]], axis: str, val: int) -> Set[Tuple[str, int]]:
+    new_grid = set()
+
+    if axis == "x":
+        for x, y in grid:
+            if x > val:
+                # 656 over 655 -> 654 = 655 - (656 - 655)
+                new_grid.add((val - (x - val), y))
+            elif x == val:
+                # These seem to just get dropped in the examples
+                pass
+            else:
+                # These stay put
+                new_grid.add((x, y))
+    else:
+        for x, y in grid:
+            if y > val:
+                # 656 over 655 -> 654 = 655 - (656 - 655)
+                new_grid.add((x, val - (y - val)))
+            elif x == val:
+                # These seem to just get dropped in the examples
+                pass
+            else:
+                # These stay put
+                new_grid.add((x, y))
+    return new_grid
 
 
 class Day13(Solution, day=13):
@@ -40,62 +67,13 @@ class Day13(Solution, day=13):
         grid = copy.copy(self.data["grid"])
         folds = self.data["folds"]
         axis, val = folds[0]
-        new_grid = set()
-
-        if axis == "x":
-            for x, y in grid:
-                if x > val:
-                    # 656 over 655 -> 654 = 655 - (656 - 655)
-                    new_grid.add((val - (x - val), y))
-                elif x == val:
-                    # These seem to just get dropped in the examples
-                    pass
-                else:
-                    # These stay put
-                    new_grid.add((x, y))
-        else:
-            for x, y in grid:
-                if y > val:
-                    # 656 over 655 -> 654 = 655 - (656 - 655)
-                    new_grid.add((x, val - (y - val)))
-                elif x == val:
-                    # These seem to just get dropped in the examples
-                    pass
-                else:
-                    # These stay put
-                    new_grid.add((x, y))
-        grid = new_grid
-        return len(grid)
+        return len(fold(grid, axis, val))
 
     def part2(self):
         grid = copy.copy(self.data["grid"])
         folds = self.data["folds"]
         for axis, val in folds:
-            new_grid = set()
-
-            if axis == "x":
-                for x, y in grid:
-                    if x > val:
-                        # 656 over 655 -> 654 = 655 - (656 - 655)
-                        new_grid.add((val - (x - val), y))
-                    elif x == val:
-                        # These seem to just get dropped in the examples
-                        pass
-                    else:
-                        # These stay put
-                        new_grid.add((x, y))
-            else:
-                for x, y in grid:
-                    if y > val:
-                        # 656 over 655 -> 654 = 655 - (656 - 655)
-                        new_grid.add((x, val - (y - val)))
-                    elif y == val:
-                        # These seem to just get dropped in the examples
-                        pass
-                    else:
-                        # These stay put
-                        new_grid.add((x, y))
-            grid = new_grid
+            grid = fold(grid, axis, val)
 
         max_x = max(x for x, _ in grid)
         max_y = max(y for _, y in grid)
