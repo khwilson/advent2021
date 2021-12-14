@@ -53,18 +53,10 @@ class Day14(Solution, day=14):
                     new_pairs_to_counts[key] += pairs_to_counts[key]
             pairs_to_counts = new_pairs_to_counts
 
-        # Resolve pairs to individual letters by looking at both the left and right
-        # of a pair and adding those up. This works only because there first and last
-        # letters of the base are different (verified by hand)
-        final_counts_left = defaultdict(int)
-        final_counts_right = defaultdict(int)
+        final_counts = defaultdict(int)
         for key, val in pairs_to_counts.items():
             left, right = key
-            final_counts_left[left] += val
-            final_counts_right[right] += val
-
-        final_counts = {}
-        for key in set(final_counts_left) | set(final_counts_right):
-            final_counts[key] = max(final_counts_left[key], final_counts_right[key])
+            final_counts[left] += val
+        final_counts[base[-1]] += 1
 
         return max(final_counts.values()) - min(final_counts.values())
