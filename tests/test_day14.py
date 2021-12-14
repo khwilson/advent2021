@@ -5,9 +5,9 @@ from advent.solutions import day14
 
 def test_part1(fixtures_path: Path):
     solution = day14.Day14(fixtures_path / "test_input14.txt")
-    assert solution.part1() == None
+    assert solution.part1() == 1588
 
 
 def test_part2(fixtures_path: Path):
     solution = day14.Day14(fixtures_path / "test_input14.txt")
-    assert solution.part2() == None
+    assert solution.part2() == 2188189693529
