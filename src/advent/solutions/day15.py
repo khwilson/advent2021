@@ -1,4 +1,5 @@
-import networkx as nx
+import heapq
+
 import numpy as np
 
 from ..solution import Solution
@@ -7,25 +8,33 @@ from ..utils import around
 
 def min_cost(board):
     """
-    Implement the answer using networkx library. The previous implementation utilized
-    the non-priority queue version of Djikstra, which is V^2 in size, which is rather
-    large. networkx does the priority-queue version which is E + V log V, which is
-    _much_ smaller.
+    Implement the answer using an actual priority queue with the built in heap
+    implementation
     """
-    g = nx.DiGraph()
-    for x in range(board.shape[0]):
-        for y in range(board.shape[1]):
-            g.add_node((x, y))
+    last_x = board.shape[0] - 1
+    last_y = board.shape[1] - 1
 
-    for x in range(board.shape[0]):
-        for y in range(board.shape[1]):
-            for xx, yy in around(x, y, board.shape):
-                g.add_edge((x, y), (xx, yy), cost=board[xx, yy])
+    heap = [(board[last_x, last_y], last_x, last_y)]
 
-    path = nx.shortest_path(
-        g, source=(0, 0), target=(board.shape[0] - 1, board.shape[1] - 1), weight="cost"
-    )
-    return sum(board[x, y] for x, y in path) - board[0, 0]
+    # This allows us to drop paths that would be longer than ones we've already explored
+    min_cost = np.ones_like(board, dtype=np.float64) * float("inf")
+
+    # Keep track of minimum length explored path here
+    heapq.heapify(heap)
+    while heap:
+        this_cost, this_x, this_y = heapq.heappop(heap)
+        for next_x, next_y in around(this_x, this_y, board.shape):
+            next_cost = this_cost + board[next_x, next_y]
+
+            # We've found the end of the path! This is necessarily the shortest path
+            # as all other prospective paths are longer!
+            if (next_x, next_y) == (0, 0):
+                return next_cost - board[0, 0]
+
+            # If we've already found a shorter path, don't explore this one
+            if next_cost < min_cost[next_x, next_y]:
+                heapq.heappush(heap, (next_cost, next_x, next_y))
+                min_cost[next_x, next_y] = next_cost
 
 
 class Day15(Solution, day=15):
