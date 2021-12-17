@@ -1,13 +1,9 @@
 from __future__ import annotations
 
-from collections import Counter, defaultdict
 from dataclasses import dataclass
 from functools import reduce
 from operator import __mul__
 from typing import List, Optional, Union
-
-import numpy as np
-import pandas as pd
 
 from ..solution import Solution
 
