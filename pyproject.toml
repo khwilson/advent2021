@@ -19,6 +19,7 @@ python-dotenv = "^0.19.2"
 requests = "^2.26.0"
 networkx = "^2.6.3"
 tqdm = "^4.62.3"
+Shapely = "^1.8.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
